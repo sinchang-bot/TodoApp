@@ -22,7 +22,7 @@ exports.createTodo = title => {
 }
 
 exports.getAllTodo = title => {
-  return Todo.findAll()
+  return Todo.findAll({ raw: true })
 }
 
 exports.deleteTodo = id => {
@@ -42,5 +42,5 @@ exports.updateTodo = (body, id) => {
 }
 
 exports.findOneTodo = (id) => {
-  return Todo.findById(id)
+  return Todo.findById(id, { raw: true })
 }

@@ -27,7 +27,8 @@ exports.handleCreate = (req, res) => {
 
   if (!title) return res.status(400).json({ message: 'Title is required' })
 
-  createTodo(title).then(() => res.json({ message: 'success' }))
+  createTodo(title)
+    .then(() => res.json({ message: 'success' }))
     .catch(err => res.status(500).json({ message: err.message }))
 }
 
@@ -48,18 +49,9 @@ exports.handleCreate = (req, res) => {
  */
 
 exports.handleGetAll = (req, res) => {
-  getAllTodo().then(data => {
-    const ret = {
-      message: 'success',
-      todo: []
-    }
-
-    data.forEach(item => {
-      ret.todo.push(item.dataValues)
-    })
-
-    res.json(ret)
-  }).catch(err => res.status(500).json({ message: err.message }))
+  getAllTodo()
+    .then(data => res.json({ message: 'success', todo: data }))
+    .catch(err => res.status(500).json({ message: err.message }))
 }
 
 /**
@@ -79,7 +71,8 @@ exports.handleGetAll = (req, res) => {
  */
 exports.handleDelete = (req, res) => {
   const id = req.params.id
-  deleteTodo(id).then(() => res.json({ message: 'success' }))
+  deleteTodo(id)
+    .then(() => res.json({ message: 'success' }))
     .catch(err => res.status(500).json({ message: err.message }))
 }
 
@@ -102,7 +95,8 @@ exports.handleDelete = (req, res) => {
  */
 exports.handleFindById = (req, res) => {
   const id = req.params.id
-  findOneTodo(id).then((data) => res.json({ message: 'success', todo: data.dataValues }))
+  findOneTodo(id)
+    .then((data) => res.json({ message: 'success', todo: data }))
     .catch(err => res.status(500).json({ message: err.message }))
 }
 
@@ -127,6 +121,7 @@ exports.handleEdit = (req, res) => {
   const id = req.params.id
   const body = req.body
 
-  updateTodo(body, id).then((data) => res.json({ message: 'success' }))
+  updateTodo(body, id)
+    .then((data) => res.json({ message: 'success' }))
     .catch(err => res.status(500).json({ message: err.message }))
 }
