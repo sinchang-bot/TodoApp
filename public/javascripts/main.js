@@ -36,7 +36,7 @@ $(function () {
     }
 
     if (classList.contains('done-btn')) {
-      var isDone = e.target.dataset.status === 'false' ? 1 : 0
+      var isDone = e.target.dataset.status === '0' ? 1 : 0
 
       updateTodo({
         isDone
